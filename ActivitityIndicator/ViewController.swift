@@ -24,7 +24,9 @@ class ViewController: UIViewController {
         Utils().startActivityIndicator()
         
         let time:TimeInterval = 3.0
-        DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + time) {
+        DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + time) { [weak self] in
+            guard let `self` = self else { return }
+            
             Utils().stopActivityIndicator()
             
             Utils().okButtonAlertView(title: "network successed", controller: self, block: nil)

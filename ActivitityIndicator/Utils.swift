@@ -22,6 +22,26 @@ class Utils: NSObject {
         controller.present(alert, animated: true, completion: nil)
     }
     
+    func okCancelAlertView(title: String, controller: UIViewController, okBlock: (() -> Void)?, cancelBlock: (() -> Void)?) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+            if (cancelBlock != nil) {
+                cancelBlock!()
+            }
+        })
+        alert.addAction(cancel)
+        
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            if (okBlock != nil) {
+                okBlock!()
+            }
+        })
+        alert.addAction(ok)
+        
+        controller.present(alert, animated: true, completion: nil)
+    }
+    
     func startActivityIndicator() {
         let root = UIApplication.shared.delegate as! AppDelegate
         let backFrame = (root.window?.frame)!

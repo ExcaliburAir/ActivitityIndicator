@@ -92,4 +92,50 @@ class Utils: NSObject {
             }
         }
     }
+    
+    func get_uuid() -> String {
+        let userID = UserDefaults.standard.string(forKey: "zhangjieshuo19880407")
+        
+        if (userID != nil) {
+            // UserDefaultsが保存したIDをもらう
+            return userID!
+        } else {
+            // 最初なら"none"を送ります
+            return "none"
+        }
+    }
+    
+    func ifGetNew_uuid(uuid: String!) -> Bool {
+        if uuid.isEmpty {
+            return false
+        } else {
+            UserDefaults.standard.set(uuid, forKey: "zhangjieshuo19880407")
+            return true
+        }
+    }
+    
+    func getRandomBool() -> Bool {
+        let random = arc4random_uniform(2)
+        if random == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func getMiddleString(originalStr: String!, fromStr: String!, toStr: String!) -> String{
+        
+        let start: Range = originalStr.range(of: fromStr)!
+        let end: Range = originalStr.range(of: toStr)!
+        
+        return originalStr.substring(with: start.upperBound..<end.lowerBound)
+    }
+    
+    func ifContains(originalStr: String!, containStr: String!) -> Bool {
+        if originalStr.contains(containStr) {
+            return true
+        } else {
+            return false
+        }
+    }
 }
